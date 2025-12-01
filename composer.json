@@ -1,0 +1,43 @@
+{
+  "name": "pratik-dabhi/firewall",
+  "description": "Advanced firewall for Laravel 11/12 (IP, CIDR, country, rate-limit, logging).",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Pratik\\Firewall\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pratik\\Firewall\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0 || ^12.0",
+    "illuminate/http": "^11.0 || ^12.0",
+    "illuminate/config": "^11.0 || ^12.0",
+    "illuminate/console": "^11.0 || ^12.0",
+    "illuminate/database": "^11.0 || ^12.0",
+    "illuminate/routing": "^11.0 || ^12.0",
+    "illuminate/cache": "^11.0 || ^12.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.3",
+    "orchestra/testbench": "^9.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Pratik\\Firewall\\FirewallServiceProvider"
+      ],
+      "aliases": {
+        "Firewall": "Pratik\\Firewall\\Facades\\Firewall"
+      }
+    }
+  },
+  "scripts": {
+    "test": "phpunit --testdox"
+  }
+}
