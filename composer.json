@@ -1,5 +1,5 @@
 {
-  "name": "pratik-dabhi/firewall",
+  "name": "pratik/laravel-firewall",
   "description": "Advanced firewall for Laravel 11/12 (IP, CIDR, country, rate-limit, logging).",
   "type": "library",
   "license": "MIT",
