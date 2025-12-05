@@ -13,19 +13,14 @@ class Firewall
 
     public function handle(Request $request, Closure $next)
     {
-        $ip = $request->ip();
+        $decision = $this->firewall->evaluate($request);
+        $ip       = $request->ip();
 
-        if ($this->firewall->isBlocked($ip)) {
-            return $this->blockedResponse($request, $ip);
+        if ($decision['allowed']) {
+            return $next($request);
         }
 
-        return $next($request);
-    }
-
-    protected function blockedResponse(Request $request, string $ip)
-    {
-        $config = config('firewall.response', []);
-
+        $config  = config('firewall.response', []);
         $status  = $config['status'] ?? 403;
         $message = $config['message'] ?? 'Access denied by firewall.';
 
@@ -33,6 +28,8 @@ class Firewall
             return new JsonResponse([
                 'message' => $message,
                 'ip'      => $ip,
+                'reason'  => $decision['reason'] ?? null,
+                'rule'    => $decision['rule'] ?? null,
             ], $status);
         }
 

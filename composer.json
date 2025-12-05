@@ -1,8 +1,37 @@
 {
-  "name": "pratik-dabhi/firewall",
-  "description": "Advanced firewall for Laravel 11/12 (IP, CIDR, country, rate-limit, logging).",
+  "name": "pratik/laravel-firewall",
+  "description": "A powerful and extensible firewall package for Laravel 11 & 12 supporting IP blocking, CIDR rules, rate limiting, request logging, and country blocking.",
   "type": "library",
   "license": "MIT",
+  "keywords": [
+    "laravel",
+    "firewall",
+    "security",
+    "middleware",
+    "ip-blocking",
+    "cidr",
+    "rate-limit",
+    "logs",
+    "geoip",
+    "laravel-package",
+    "country-blocking",
+    "ddos-protection",
+    "blacklist",
+    "whitelist"
+  ],
+  "authors": [
+    {
+      "name": "Pratik Dabhi",
+      "email": "pratik.dabhiii.23@gmail.com",
+      "homepage": "https://github.com/pratik-dabhi"
+    }
+  ],
+
+  "support": {
+    "issues": "https://github.com/pratik-dabhi/laravel-firewall/issues",
+    "source": "https://github.com/pratik-dabhi/laravel-firewall"
+  },
+
   "autoload": {
     "psr-4": {
       "Pratik\\Firewall\\": "src/"
@@ -13,6 +42,7 @@
       "Pratik\\Firewall\\Tests\\": "tests/"
     }
   },
+
   "require": {
     "php": "^8.2",
     "illuminate/support": "^11.0 || ^12.0",
@@ -23,10 +53,12 @@
     "illuminate/routing": "^11.0 || ^12.0",
     "illuminate/cache": "^11.0 || ^12.0"
   },
+
   "require-dev": {
     "phpunit/phpunit": "^11.3",
     "orchestra/testbench": "^9.0"
   },
+
   "extra": {
     "laravel": {
       "providers": [
@@ -37,6 +69,7 @@
       }
     }
   },
+
   "scripts": {
     "test": "phpunit --testdox"
   }

@@ -16,8 +16,7 @@ class RateLimitRule implements RuleInterface
 
         $decay = $config['rate_limit']['decay_seconds'] ?? 60;
         $key = 'fw_rate_' . $ip;
-
-        $attempts = Cache::increment($key);
+        $attempts = Cache::get($key, 0) + 1;
         Cache::put($key, $attempts, $decay);
 
         return $attempts > $limit;

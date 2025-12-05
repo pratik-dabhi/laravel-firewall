@@ -13,27 +13,29 @@ class FirewallMiddlewareTest extends TestCase
         })->middleware('firewall');
     }
 
-    public function test_blocked_ip_gets_403()
+    public function test_allowed_ip_passes_through()
     {
-        config([
-            'firewall.blacklist' => ['1.2.3.4'],
-            'firewall.logging.enabled' => false,
-        ]);
-
-        $response = $this->get('/', ['REMOTE_ADDR' => '1.2.3.4']);
-
-        $response->assertStatus(403);
+        $this->get('/', ['REMOTE_ADDR' => '127.0.0.1'])
+            ->assertStatus(200)
+            ->assertSee('ok');
     }
 
-    public function test_allowed_ip_gets_200()
+    public function test_blocked_ip_gets_403()
     {
-        config([
-            'firewall.blacklist' => [],
-            'firewall.logging.enabled' => false,
-        ]);
+        config(['firewall.blacklist' => ['1.2.3.4']]);
 
-        $response = $this->get('/', ['REMOTE_ADDR' => '2.3.4.5']);
+        $this->get('/', ['REMOTE_ADDR' => '1.2.3.4'])->assertStatus(403);
+    }
 
-        $response->assertStatus(200);
+    public function test_rate_limited_ip_gets_403_after_threshold()
+    {
+        config(['firewall.rate_limit.max_attempts' => 3]);
+        config(['firewall.rate_limit.decay_seconds' => 60]);
+        
+        for ($i = 0; $i < 3; $i++) {
+            $this->get('/', ['REMOTE_ADDR' => '10.0.0.1'])->assertStatus(200);
+        }
+
+        $this->get('/', ['REMOTE_ADDR' => '10.0.0.1'])->assertStatus(403);
     }
 }

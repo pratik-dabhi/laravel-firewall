@@ -9,8 +9,11 @@ return new class extends Migration {
     {
         Schema::create('firewall_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('ip', 45);
-            $table->string('reason')->nullable();
+            $table->string('ip_address', 45)->index();
+            $table->text('user_agent')->nullable();
+            $table->string('method', 10);
+            $table->string('path', 2048);
+            $table->enum('action', ['allow', 'block', 'ratelimit', 'captcha', 'challenge'])->index();
             $table->timestamps();
         });
     }

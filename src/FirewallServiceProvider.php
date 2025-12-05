@@ -8,6 +8,7 @@ use Pratik\Firewall\Services\FirewallManager;
 use Pratik\Firewall\Services\GeoIPService;
 use Pratik\Firewall\Services\Rules\BlacklistRule;
 use Pratik\Firewall\Services\Rules\CidrRule;
+use Pratik\Firewall\Services\Rules\CountryRule;
 use Pratik\Firewall\Services\Rules\RateLimitRule;
 
 class FirewallServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class FirewallServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/firewall.php', 'firewall');
-
+        
         $this->app->singleton(GeoIPService::class, function () {
             return new GeoIPService();
         });
@@ -23,15 +24,18 @@ class FirewallServiceProvider extends ServiceProvider
         $this->app->singleton(FirewallManager::class, function ($app) {
             $config = $app['config']->get('firewall', []);
 
+            $geo = $app->make(GeoIPService::class);
+
             $rules = [
-                new CidrRule(),
                 new BlacklistRule(),
+                new CidrRule(),
+                new CountryRule($geo),
                 new RateLimitRule(),
             ];
 
             return new FirewallManager($config, $rules);
         });
-
+        
         $this->app->alias(FirewallManager::class, 'firewall');
     }
 
@@ -40,6 +44,10 @@ class FirewallServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/firewall.php' => config_path('firewall.php'),
         ], 'firewall-config');
+
+        $this->publishes([
+            __DIR__ . '/../database/migrations/' => database_path('migrations'),
+        ], 'firewall-migrations');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
