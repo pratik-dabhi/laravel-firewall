@@ -7,4 +7,11 @@ All notable changes to `laravel-firewall` will be documented in this file.
 - CIDR blocking
 - Rate limiting
 - Logging
-- Laravel 11+ support
+- Laravel 10+ support
+
+
+## v1.1.0 - Dashboard & Logs Feature Release
+- Dashboard with today's blocks & total logs
+- Threat breakdown by type
+- Logs viewer with search
+

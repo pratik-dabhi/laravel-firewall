@@ -1,6 +1,6 @@
 {
   "name": "pratik/laravel-firewall",
-  "description": "A powerful and extensible firewall package for Laravel 11 & 12 supporting IP blocking, CIDR rules, rate limiting, request logging, and country blocking.",
+  "description": "A powerful and extensible firewall package for Laravel 10+ supporting IP blocking, CIDR rules, rate limiting, request logging, and country blocking.",
   "type": "library",
   "license": "MIT",
   "keywords": [
