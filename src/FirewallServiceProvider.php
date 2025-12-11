@@ -49,8 +49,16 @@ class FirewallServiceProvider extends ServiceProvider
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
         ], 'firewall-migrations');
 
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/firewall'),
+        ], 'firewall-views');
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->app->router->aliasMiddleware('firewall', FirewallMiddleware::class);
+        
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'firewall');
+        
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 }
