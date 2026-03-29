@@ -30,6 +30,12 @@ abstract class TestCase extends BaseTestCase
 
         $app['config']->set('firewall', [
             'enabled'  => true,
+            'rules'    => [
+                \Pratik\Firewall\Services\Rules\BlacklistRule::class,
+                \Pratik\Firewall\Services\Rules\CidrRule::class,
+                \Pratik\Firewall\Services\Rules\CountryRule::class,
+                \Pratik\Firewall\Services\Rules\RateLimitRule::class,
+            ],
             'blacklist' => [],
             'whitelist' => ['127.0.0.1'],
             'cidr'      => [],

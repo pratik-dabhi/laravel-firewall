@@ -2,11 +2,11 @@
 
 namespace Pratik\Firewall\Services\Rules;
 
-use Pratik\Firewall\Services\GeoIPService;
+use Pratik\Firewall\Services\GeoIPServiceInterface;
 
 class CountryRule implements RuleInterface
 {
-    public function __construct(protected GeoIPService $geo) {}
+    public function __construct(protected GeoIPServiceInterface $geo) {}
 
     public function isBlocked(string $ip, array $config): bool
     {

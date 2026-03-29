@@ -10,6 +10,20 @@ use Illuminate\View\View;
 class DashboardController extends Controller
 {
     /**
+     * Get the base query builder for firewall logs.
+     */
+    protected function getLogQuery()
+    {
+        $modelClass = config('firewall.logging.model');
+        if ($modelClass && class_exists($modelClass)) {
+            return $modelClass::query();
+        }
+        
+        $table = config('firewall.logging.table', 'firewall_logs');
+        return DB::table($table);
+    }
+
+    /**
      * Display the firewall dashboard.
      *
      * @return View
@@ -36,7 +50,7 @@ class DashboardController extends Controller
      */
     public function logs(Request $request): View
     {
-        $query = DB::table('firewall_logs')->orderByDesc('created_at');
+        $query = $this->getLogQuery()->orderByDesc('created_at');
         
         $this->applyFilters($query, $request);
         
@@ -44,8 +58,8 @@ class DashboardController extends Controller
         
         return view('firewall::logs', [
             'logs' => $logs,
-            'totalEntries' => DB::table('firewall_logs')->count(),
-            'latestEvent' => DB::table('firewall_logs')
+            'totalEntries' => $this->getLogQuery()->count(),
+            'latestEvent' => $this->getLogQuery()
                 ->select(['id', 'ip_address', 'action', 'created_at'])
                 ->latest('created_at')
                 ->first(),
@@ -60,11 +74,11 @@ class DashboardController extends Controller
      */
     protected function getDashboardStats($today): array
     {
-        $todayBlocks = DB::table('firewall_logs')->where('created_at', '>=', $today)->count();
+        $todayBlocks = $this->getLogQuery()->where('created_at', '>=', $today)->count();
         
-        $totalLogs = DB::table('firewall_logs')->count();
+        $totalLogs = $this->getLogQuery()->count();
         
-        $threats = DB::table('firewall_logs')
+        $threats = $this->getLogQuery()
             ->select('action')
             ->selectRaw('COUNT(*) as total')
             ->groupBy('action')
