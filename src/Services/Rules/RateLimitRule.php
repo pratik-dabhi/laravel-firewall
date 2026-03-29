@@ -2,7 +2,7 @@
 
 namespace Pratik\Firewall\Services\Rules;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\RateLimiter;
 
 class RateLimitRule implements RuleInterface
 {
@@ -16,10 +16,14 @@ class RateLimitRule implements RuleInterface
 
         $decay = $config['rate_limit']['decay_seconds'] ?? 60;
         $key = 'fw_rate_' . $ip;
-        $attempts = Cache::get($key, 0) + 1;
-        Cache::put($key, $attempts, $decay);
 
-        return $attempts > $limit;
+        if (RateLimiter::tooManyAttempts($key, $limit)) {
+            return true;
+        }
+
+        RateLimiter::hit($key, $decay);
+
+        return false;
     }
 
     public function reason(): string

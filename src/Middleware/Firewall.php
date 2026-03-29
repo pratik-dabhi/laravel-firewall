@@ -35,4 +35,24 @@ class Firewall
 
         abort($status, $message);
     }
+
+    public function terminate(Request $request, $response)
+    {
+        $queue = $this->firewall->getLogQueue();
+
+        if (empty($queue)) {
+            return;
+        }
+
+        $modelClass = config('firewall.logging.model');
+
+        if ($modelClass && class_exists($modelClass)) {
+            $modelClass::insert($queue);
+        } else {
+            $table = config('firewall.logging.table', 'firewall_logs');
+            \Illuminate\Support\Facades\DB::table($table)->insert($queue);
+        }
+
+        $this->firewall->clearLogQueue();
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace Pratik\Firewall\Services;
 
-class GeoIPService
+class GeoIPService implements GeoIPServiceInterface
 {
     public function getCountryCode(string $ip): ?string
     {

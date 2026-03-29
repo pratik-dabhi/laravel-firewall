@@ -15,6 +15,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Firewall Rules
+    |--------------------------------------------------------------------------
+    |
+    | The classes responsible for evaluating requests. You can add, remove,
+    | or reorder rules here to customize your firewall protection.
+    |
+    */
+
+    'rules' => [
+        \Pratik\Firewall\Services\Rules\BlacklistRule::class,
+        \Pratik\Firewall\Services\Rules\CidrRule::class,
+        \Pratik\Firewall\Services\Rules\CountryRule::class,
+        \Pratik\Firewall\Services\Rules\RateLimitRule::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Static Rules: IP Blacklist / Whitelist / CIDR
     |--------------------------------------------------------------------------
     */
@@ -78,6 +95,21 @@ return [
     'logging' => [
         'enabled' => true,
         'table'   => 'firewall_logs',
+        'model'   => \Pratik\Firewall\Models\FirewallLog::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for the built-in firewall dashboard and logs viewer.
+    | Route middleware secures public access to the dashboard.
+    |
+    */
+
+    'dashboard' => [
+        'middleware' => ['web'], // Add 'auth' or a custom gate here for protection
     ],
 
     /*

@@ -17,21 +17,19 @@ class FirewallServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/firewall.php', 'firewall');
         
-        $this->app->singleton(GeoIPService::class, function () {
-            return new GeoIPService();
-        });
+        $this->app->bind(\Pratik\Firewall\Services\GeoIPServiceInterface::class, \Pratik\Firewall\Services\GeoIPService::class);
 
         $this->app->singleton(FirewallManager::class, function ($app) {
             $config = $app['config']->get('firewall', []);
 
-            $geo = $app->make(GeoIPService::class);
-
-            $rules = [
-                new BlacklistRule(),
-                new CidrRule(),
-                new CountryRule($geo),
-                new RateLimitRule(),
-            ];
+            $ruleClasses = $config['rules'] ?? [];
+            $rules = [];
+            
+            foreach ($ruleClasses as $ruleClass) {
+                if (class_exists($ruleClass)) {
+                    $rules[] = $app->make($ruleClass);
+                }
+            }
 
             return new FirewallManager($config, $rules);
         });

@@ -11,6 +11,7 @@ class FirewallManager
     protected array $config;
     /** @var RuleInterface[] */
     protected array $rules = [];
+    protected array $logQueue = [];
 
     public function __construct(array $config, array $rules = [])
     {
@@ -24,6 +25,22 @@ class FirewallManager
     public function addRule(RuleInterface $rule): void
     {
         $this->rules[] = $rule;
+    }
+
+    /**
+     * Get queued logs for deferred insertion.
+     */
+    public function getLogQueue(): array
+    {
+        return $this->logQueue;
+    }
+
+    /**
+     * Clear the log queue.
+     */
+    public function clearLogQueue(): void
+    {
+        $this->logQueue = [];
     }
 
     /**
@@ -98,7 +115,18 @@ class FirewallManager
     }
 
     /**
-     * Log a blocked or rate-limited request to the database.
+     * Accessor for firewall configuration
+     */
+    public function getConfig(string $key = null, $default = null)
+    {
+        if ($key === null) {
+            return $this->config;
+        }
+        return $this->config[$key] ?? $default;
+    }
+
+    /**
+     * Queue a blocked or rate-limited request log.
      */
     protected function logIfNeeded(Request $request, array $result): void
     {
@@ -117,7 +145,7 @@ class FirewallManager
             $path = substr($path, 0, 2048);
         }
 
-        DB::table($table)->insert([
+        $this->logQueue[] = [
             'ip_address'      => $request->ip(),
             'user_agent'      => (string) ($request->userAgent() ?? ''),
             'method'          => $request->getMethod(),
@@ -125,6 +153,6 @@ class FirewallManager
             'action'          => $result['action'],
             'created_at'      => now(),
             'updated_at'      => now(),
-        ]);
+        ];
     }
 }
