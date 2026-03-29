@@ -1,9 +1,9 @@
 <?php
 
-namespace Pratik\Firewall\Tests;
+namespace PratikDabhi\Firewall\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Pratik\Firewall\FirewallServiceProvider;
+use PratikDabhi\Firewall\FirewallServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -31,10 +31,10 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('firewall', [
             'enabled'  => true,
             'rules'    => [
-                \Pratik\Firewall\Services\Rules\BlacklistRule::class,
-                \Pratik\Firewall\Services\Rules\CidrRule::class,
-                \Pratik\Firewall\Services\Rules\CountryRule::class,
-                \Pratik\Firewall\Services\Rules\RateLimitRule::class,
+                \PratikDabhi\Firewall\Services\Rules\BlacklistRule::class,
+                \PratikDabhi\Firewall\Services\Rules\CidrRule::class,
+                \PratikDabhi\Firewall\Services\Rules\CountryRule::class,
+                \PratikDabhi\Firewall\Services\Rules\RateLimitRule::class,
             ],
             'blacklist' => [],
             'whitelist' => ['127.0.0.1'],

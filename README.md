@@ -1,7 +1,7 @@
 # Laravel Firewall  
 <!-- ![GitHub Tests](https://github.com/pratik-dabhi/laravel-firewall/actions/workflows/tests.yml/badge.svg)
-![Packagist Version](https://img.shields.io/packagist/v/pratik/laravel-firewall.svg)
-![Downloads](https://img.shields.io/packagist/dt/pratik/laravel-firewall.svg)
+![Packagist Version](https://img.shields.io/packagist/v/pratik-dabhi/laravel-firewall.svg)
+![Downloads](https://img.shields.io/packagist/dt/pratik-dabhi/laravel-firewall.svg)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen.svg) -->
 
 A powerful, extensible, and developer-friendly **application-level firewall for Laravel 10+**.
@@ -20,7 +20,7 @@ It brings enterprise-level request filtering & monitoring into your Laravel appl
 
 ## Installation
 ```bash
-composer require pratik/laravel-firewall
+composer require pratik-dabhi/laravel-firewall
 ```
 
 ## Publishing
@@ -45,7 +45,7 @@ Register middleware in Laravel 12 (`bootstrap/app.php`):
 ```php
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->alias([
-        'firewall' => \Pratik\Firewall\Middleware\Firewall::class,
+        'firewall' => \PratikDabhi\Firewall\Middleware\Firewall::class,
     ]);
 })
 ```

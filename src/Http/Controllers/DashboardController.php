@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratik\Firewall\Http\Controllers;
+namespace PratikDabhi\Firewall\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

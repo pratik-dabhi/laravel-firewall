@@ -24,10 +24,10 @@ return [
     */
 
     'rules' => [
-        \Pratik\Firewall\Services\Rules\BlacklistRule::class,
-        \Pratik\Firewall\Services\Rules\CidrRule::class,
-        \Pratik\Firewall\Services\Rules\CountryRule::class,
-        \Pratik\Firewall\Services\Rules\RateLimitRule::class,
+        \PratikDabhi\Firewall\Services\Rules\BlacklistRule::class,
+        \PratikDabhi\Firewall\Services\Rules\CidrRule::class,
+        \PratikDabhi\Firewall\Services\Rules\CountryRule::class,
+        \PratikDabhi\Firewall\Services\Rules\RateLimitRule::class,
     ],
 
     /*
@@ -95,7 +95,7 @@ return [
     'logging' => [
         'enabled' => true,
         'table'   => 'firewall_logs',
-        'model'   => \Pratik\Firewall\Models\FirewallLog::class,
+        'model'   => \PratikDabhi\Firewall\Models\FirewallLog::class,
     ],
 
     /*

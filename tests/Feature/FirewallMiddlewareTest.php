@@ -1,8 +1,8 @@
 <?php
 
-namespace Pratik\Firewall\Tests\Feature;
+namespace PratikDabhi\Firewall\Tests\Feature;
 
-use Pratik\Firewall\Tests\TestCase;
+use PratikDabhi\Firewall\Tests\TestCase;
 
 class FirewallMiddlewareTest extends TestCase
 {

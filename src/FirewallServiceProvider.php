@@ -1,15 +1,15 @@
 <?php
 
-namespace Pratik\Firewall;
+namespace PratikDabhi\Firewall;
 
 use Illuminate\Support\ServiceProvider;
-use Pratik\Firewall\Middleware\Firewall as FirewallMiddleware;
-use Pratik\Firewall\Services\FirewallManager;
-use Pratik\Firewall\Services\GeoIPService;
-use Pratik\Firewall\Services\Rules\BlacklistRule;
-use Pratik\Firewall\Services\Rules\CidrRule;
-use Pratik\Firewall\Services\Rules\CountryRule;
-use Pratik\Firewall\Services\Rules\RateLimitRule;
+use PratikDabhi\Firewall\Middleware\Firewall as FirewallMiddleware;
+use PratikDabhi\Firewall\Services\FirewallManager;
+use PratikDabhi\Firewall\Services\GeoIPService;
+use PratikDabhi\Firewall\Services\Rules\BlacklistRule;
+use PratikDabhi\Firewall\Services\Rules\CidrRule;
+use PratikDabhi\Firewall\Services\Rules\CountryRule;
+use PratikDabhi\Firewall\Services\Rules\RateLimitRule;
 
 class FirewallServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class FirewallServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/firewall.php', 'firewall');
         
-        $this->app->bind(\Pratik\Firewall\Services\GeoIPServiceInterface::class, \Pratik\Firewall\Services\GeoIPService::class);
+        $this->app->bind(\PratikDabhi\Firewall\Services\GeoIPServiceInterface::class, \PratikDabhi\Firewall\Services\GeoIPService::class);
 
         $this->app->singleton(FirewallManager::class, function ($app) {
             $config = $app['config']->get('firewall', []);

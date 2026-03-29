@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratik\Firewall\Models;
+namespace PratikDabhi\Firewall\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
