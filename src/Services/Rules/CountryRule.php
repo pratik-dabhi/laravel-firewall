@@ -1,8 +1,8 @@
 <?php
 
-namespace Pratik\Firewall\Services\Rules;
+namespace PratikDabhi\Firewall\Services\Rules;
 
-use Pratik\Firewall\Services\GeoIPServiceInterface;
+use PratikDabhi\Firewall\Services\GeoIPServiceInterface;
 
 class CountryRule implements RuleInterface
 {

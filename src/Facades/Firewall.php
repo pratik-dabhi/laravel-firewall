@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratik\Firewall\Facades;
+namespace PratikDabhi\Firewall\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

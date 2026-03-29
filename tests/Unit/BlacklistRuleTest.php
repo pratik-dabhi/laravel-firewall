@@ -1,9 +1,9 @@
 <?php
 
-namespace Pratik\Firewall\Tests\Unit;
+namespace PratikDabhi\Firewall\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Pratik\Firewall\Services\Rules\BlacklistRule;
+use PratikDabhi\Firewall\Services\Rules\BlacklistRule;
 
 class BlacklistRuleTest extends TestCase
 {

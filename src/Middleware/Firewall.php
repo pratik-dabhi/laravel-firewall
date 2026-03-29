@@ -1,11 +1,11 @@
 <?php
 
-namespace Pratik\Firewall\Middleware;
+namespace PratikDabhi\Firewall\Middleware;
 
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Pratik\Firewall\Services\FirewallManager;
+use PratikDabhi\Firewall\Services\FirewallManager;
 
 class Firewall
 {

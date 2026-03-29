@@ -1,5 +1,5 @@
 {
-  "name": "pratik/laravel-firewall",
+  "name": "pratik-dabhi/laravel-firewall",
   "description": "A powerful and extensible firewall package for Laravel 10+ supporting IP blocking, CIDR rules, rate limiting, request logging, and country blocking.",
   "type": "library",
   "license": "MIT",
@@ -34,12 +34,12 @@
 
   "autoload": {
     "psr-4": {
-      "Pratik\\Firewall\\": "src/"
+      "PratikDabhi\\Firewall\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Pratik\\Firewall\\Tests\\": "tests/"
+      "PratikDabhi\\Firewall\\Tests\\": "tests/"
     }
   },
 
@@ -62,10 +62,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Pratik\\Firewall\\FirewallServiceProvider"
+        "PratikDabhi\\Firewall\\FirewallServiceProvider"
       ],
       "aliases": {
-        "Firewall": "Pratik\\Firewall\\Facades\\Firewall"
+        "Firewall": "PratikDabhi\\Firewall\\Facades\\Firewall"
       }
     }
   },

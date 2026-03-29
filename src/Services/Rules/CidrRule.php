@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratik\Firewall\Services\Rules;
+namespace PratikDabhi\Firewall\Services\Rules;
 
 class CidrRule implements RuleInterface
 {

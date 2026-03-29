@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratik\Firewall\Services;
+namespace PratikDabhi\Firewall\Services;
 
 interface GeoIPServiceInterface
 {

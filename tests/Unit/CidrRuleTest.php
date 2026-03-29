@@ -1,9 +1,9 @@
 <?php
 
-namespace Pratik\Firewall\Tests\Unit;
+namespace PratikDabhi\Firewall\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Pratik\Firewall\Services\Rules\CidrRule;
+use PratikDabhi\Firewall\Services\Rules\CidrRule;
 
 class CidrRuleTest extends TestCase
 {

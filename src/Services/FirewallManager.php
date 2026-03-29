@@ -1,10 +1,10 @@
 <?php
 
-namespace Pratik\Firewall\Services;
+namespace PratikDabhi\Firewall\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Pratik\Firewall\Services\Rules\RuleInterface;
+use PratikDabhi\Firewall\Services\Rules\RuleInterface;
 
 class FirewallManager
 {

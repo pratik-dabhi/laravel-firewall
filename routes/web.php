@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Pratik\Firewall\Http\Controllers\DashboardController;
+use PratikDabhi\Firewall\Http\Controllers\DashboardController;
 
 $middlewares = config('firewall.dashboard.middleware', ['web']);
 
