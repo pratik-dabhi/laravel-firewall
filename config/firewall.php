@@ -67,6 +67,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | GeoIP Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for the GeoIP service used by CountryRule.
+    | We use ip-api.com by default. The results are cached to improve 
+    | performance and avoid hitting rate limits.
+    |
+    */
+
+    'geoip' => [
+        'service_url' => env('FIREWALL_GEOIP_URL', 'http://ip-api.com/json/{ip}?fields=status,countryCode'),
+        'cache_ttl'   => env('FIREWALL_GEOIP_CACHE_TTL', 60 * 60 * 24 * 30), // Default 30 days
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Rate Limiting
     |--------------------------------------------------------------------------
     |
